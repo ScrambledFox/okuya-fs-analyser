@@ -10,7 +10,7 @@ export default function InfoParagraph({
   icon?: React.ReactNode;
 }) {
   return (
-    <div className="m-8">
+    <div>
       <div className="absolute -translate-x-24 translate-y-4">{icon}</div>
 
       <div id="introduction" className="m-auto mb-4 max-w-xl">

@@ -19,10 +19,31 @@ export default function Home() {
 
   const [gotCode, setGotCode] = React.useState(false);
 
+  // useEffect(() => {
+  //   const code = searchParams.get("code");
+  //   if (!code) {
+  //     router.push("/nocode");
+  //   } else if (code.length !== 5) {
+  //     router.push("/nocode");
+  //   } else {
+  //     setCode(code);
+  //     setGotCode(true);
+  //   }
+  // }, [router, searchParams, setCode]);
+
   useEffect(() => {
     const code = searchParams.get("code");
     if (!code) {
-      router.push("/nocode");
+      fetch("https://random-word-api.herokuapp.com/word?length=5").then(
+        (response) => {
+          response.json().then((data) => {
+            const newCode = data;
+            setCode(newCode);
+            setGotCode(true);
+            router.push("/?code=" + newCode);
+          });
+        }
+      );
     } else if (code.length !== 5) {
       router.push("/nocode");
     } else {
@@ -32,15 +53,17 @@ export default function Home() {
   }, [router, searchParams, setCode]);
 
   return (
-    <main className="w-screen h-screen dark text-foreground bg-background">
+    <main className="dark text-foreground bg-background">
       {gotCode ? (
-        <div className="h-screen flex flex-col items-center justify-center">
-          <div>
-            <div
-              id="header"
-              className="mb-8 mt-8 m-auto w-3/4 text-center font-semibold text-3xl"
-            >
-              <h1>FMP Project Okuya</h1>
+        <div className="h-screen items-center justify-center">
+          <div className="m-8">
+            <div className="items-center justify-center">
+              <div className="mt-8 font-semibold text-3xl">
+                <h1>FMP Project Okuya</h1>
+                <p className="italic text-xs text-gray-400 mb-4">
+                  by Joris Lodewijks | 2023
+                </p>
+              </div>
             </div>
             <InfoParagraph title="Introduction">
               <p>
@@ -64,7 +87,7 @@ export default function Home() {
                 .
               </p>
             </InfoParagraph>
-            <div id="continueButton" className="w-fit m-auto mb-8">
+            <div id="continueButton" className="w-fit m-auto pb-8">
               <Button onClick={() => router.push("/quiz")}>Continue</Button>
             </div>
           </div>
