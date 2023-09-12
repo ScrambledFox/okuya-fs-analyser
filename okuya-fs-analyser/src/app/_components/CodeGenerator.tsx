@@ -3,14 +3,16 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
-import useUserStore from "../state/userStore";
+import useUserStore from "../_services/useUserService";
 
 import InfoParagraph from "./InfoParagraph";
 import { MdNotificationImportant } from "react-icons/md";
 
 export default function CodeGenerator() {
-  const code = useUserStore((state) => state.code);
-  const setCode = useUserStore((state) => state.setCode);
+  const userService = useUserStore();
+  const code = userService.code;
+  const setCode = userService.setCode;
+
   const searchParams = useSearchParams();
 
   useEffect(() => {

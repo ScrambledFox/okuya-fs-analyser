@@ -1,0 +1,50 @@
+{
+    "images": [
+        "https://picsum.photos/500/500",
+        "https://picsum.photos/500/500"
+    ],
+    "prompts": [
+        {
+            "prompt": "Which room flows better?",
+            "options": [
+                "https://picsum.photos/500/500",
+                "https://picsum.photos/500/500"
+            ]
+        },
+        {
+            "prompt": "Which room flows better?",
+            "options": [
+                "https://picsum.photos/500/500",
+                "https://picsum.photos/500/500"
+            ]
+        },
+        {
+            "prompt": "Which room flows better?",
+            "options": [
+                "https://picsum.photos/500/500",
+                "https://picsum.photos/500/500"
+            ]
+        },
+        {
+            "prompt": "Which room flows better?",
+            "options": [
+                "https://picsum.photos/500/500",
+                "https://picsum.photos/500/500"
+            ]
+        },
+        {
+            "prompt": "Which room flows better?",
+            "options": [
+                "https://picsum.photos/500/500",
+                "https://picsum.photos/500/500"
+            ]
+        },
+        {
+            "prompt": "Which room flows better?",
+            "options": [
+                "https://picsum.photos/500/500",
+                "https://picsum.photos/500/500"
+            ]
+        }
+    ]
+}

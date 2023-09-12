@@ -3,19 +3,19 @@
 import React, { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import useUserStore from "../state/userStore";
-
 import { Button } from "@nextui-org/button";
 import { Spinner } from "@nextui-org/spinner";
 
-import InfoParagraph from "./InfoParagraph";
-import CodeGenerator from "./CodeGenerator";
+import InfoParagraph from "./_components/InfoParagraph";
+import CodeGenerator from "./_components/CodeGenerator";
+import useUserService from "./_services/useUserService";
 
 export default function Home() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const setCode = useUserStore((state) => state.setCode);
+  const userService = useUserService();
+  const setCode = userService.setCode;
 
   const [gotCode, setGotCode] = React.useState(false);
 
@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <main className="dark text-foreground bg-background">
       {gotCode ? (
-        <div className="h-screen items-center justify-center">
+        <div className="items-center justify-center">
           <div className="m-8">
             <div className="items-center justify-center">
               <div className="mt-8 font-semibold text-3xl">
@@ -88,7 +88,7 @@ export default function Home() {
               </p>
             </InfoParagraph>
             <div id="continueButton" className="w-fit m-auto pb-8">
-              <Button onClick={() => router.push("/quiz")}>Continue</Button>
+              <Button color="primary" onClick={() => router.push("/quiz")}>Continue</Button>
             </div>
           </div>
         </div>
