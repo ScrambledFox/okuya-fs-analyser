@@ -3,50 +3,44 @@
 
 import React from "react";
 
-import { Image } from "@nextui-org/image";
 import OverlayImage from "./OverlayImage";
+import useQuizService from "../_services/useQuizService";
 
 export default function ImageCarousel({
-  prompt,
   images,
-  selectedImageIndex,
-  setSelectedImageIndex,
-  answerPrompt,
+  imageConfirmed,
 }: {
-  prompt: string;
   images: string[];
-  selectedImageIndex: null | number;
-  setSelectedImageIndex: React.Dispatch<React.SetStateAction<null | number>>;
-  answerPrompt: () => Promise<void>;
+  imageConfirmed: (i: number) => void;
 }) {
-  return (
-    <>
-      <div className="text-center flex flex-col">
-        {/* <i className="text-gray-300">
-          Click on the image you find more fitting with the question below.
-        </i> */}
-        <h2 className="text-3xl">"{prompt}"</h2>
+  const [selectedImageIndex, setSelectedImageIndex] = React.useState<
+    number | null
+  >(null);
 
-        <div className="flex flex-row max-md:flex-col">
-          {images.map((image, i) => (
-            <div key={i} className="m-8">
-              <span
-                className="absolute border-4 border-red-600"
-                // className={`${
-                //   selectedImageIndex === i ? "border-4 border-red-600" : ""
-                // }`}
-              />
-              <OverlayImage
-                image={image}
-                i={i}
-                isSelected={selectedImageIndex === i}
-                setSelectedImageIndex={setSelectedImageIndex}
-                answerPrompt={answerPrompt}
-              />
-            </div>
-          ))}
-        </div>
+  const quizService = useQuizService();
+  const sendAnswer = quizService.sendAnswer;
+
+  return (
+    <div className="text-center flex flex-col">
+      <div className="flex flex-row max-md:flex-col">
+        {images.map((image, i) => (
+          <div key={i} className="m-8">
+            <span
+              className="absolute border-4 border-red-600"
+              // className={`${
+              //   selectedImageIndex === i ? "border-4 border-red-600" : ""
+              // }`}
+            />
+            <OverlayImage
+              image={image}
+              i={i}
+              isSelected={selectedImageIndex === i}
+              setSelectedImageIndex={setSelectedImageIndex}
+              confirmAnswer={() => imageConfirmed(i)}
+            />
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }

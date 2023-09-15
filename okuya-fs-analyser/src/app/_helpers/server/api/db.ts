@@ -8,7 +8,7 @@ mongoose.Promise = global.Promise;
 function AnswerModel() {
   const schema = new Schema(
     {
-      promptId: { type: Number, required: true },
+      promptId: { type: String, required: true },
       answer: { type: Number, required: true },
       userCode: { type: String, required: true },
       thinkTime: { type: Number, required: true },

@@ -3,48 +3,39 @@
         "https://picsum.photos/500/500",
         "https://picsum.photos/500/500"
     ],
-    "prompts": [
+    "pages": [
         {
-            "prompt": "Which room flows better?",
+            "type": "info",
+            "header": "Welcome to the study!",
+            "text": "This is a study about interior design. You will be shown a series of images of rooms and asked to choose which one you think fits most we the prompt given. For example, \"In which of these two rooms is the chair positioned in a more comfortable way?\""
+        },
+        {
+            "type": "info",
+            "header": "Instructions",
+            "text": "In the next few prompts, you will be shown two images of rooms. Please choose the one you like better."
+        },
+        {
+            "type": "prompt",
+            "id": "123",
+            "header": "In which of these two rooms is the chair positioned in a more comfortable way?",
             "options": [
                 "https://picsum.photos/500/500",
                 "https://picsum.photos/500/500"
             ]
         },
         {
-            "prompt": "Which room flows better?",
+            "type": "prompt",
+            "id": "345",
+            "header": "In which prompt do we prompt more?",
             "options": [
                 "https://picsum.photos/500/500",
                 "https://picsum.photos/500/500"
             ]
         },
         {
-            "prompt": "Which room flows better?",
-            "options": [
-                "https://picsum.photos/500/500",
-                "https://picsum.photos/500/500"
-            ]
-        },
-        {
-            "prompt": "Which room flows better?",
-            "options": [
-                "https://picsum.photos/500/500",
-                "https://picsum.photos/500/500"
-            ]
-        },
-        {
-            "prompt": "Which room flows better?",
-            "options": [
-                "https://picsum.photos/500/500",
-                "https://picsum.photos/500/500"
-            ]
-        },
-        {
-            "prompt": "Which room flows better?",
-            "options": [
-                "https://picsum.photos/500/500",
-                "https://picsum.photos/500/500"
-            ]
+            "type": "info",
+            "header": "Thanks for participating!",
+            "text": "You're all done! You can now close this window."
         }
     ]
 }

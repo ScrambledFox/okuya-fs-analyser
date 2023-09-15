@@ -11,13 +11,13 @@ export default function OverlayImage({
   i,
   isSelected,
   setSelectedImageIndex,
-  answerPrompt,
+  confirmAnswer,
 }: {
   image: string;
   i: number;
   isSelected: boolean;
   setSelectedImageIndex: React.Dispatch<React.SetStateAction<null | number>>;
-  answerPrompt: () => Promise<void>;
+  confirmAnswer: () => void;
 }) {
   return (
     <div className="relative cursor-pointer">
@@ -34,7 +34,7 @@ export default function OverlayImage({
           <div className="absolute inset-0 transition-all duration-300 ease-in-out group-hover:scale-100">
             <div
               className="w-[72px] h-[72px] text-green-600 bg-white rounded-full flex justify-center items-center z-50"
-              onClick={() => answerPrompt()}
+              onClick={() => confirmAnswer()}
             >
               <AiFillCheckCircle size={64} />
             </div>

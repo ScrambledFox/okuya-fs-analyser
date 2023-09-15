@@ -2,76 +2,60 @@
 
 import React from "react";
 import useUserService from "@/app/_services/useUserService";
+import useQuizService, { Prompt } from "../_services/useQuizService";
 
 import { Button } from "@nextui-org/button";
 import { Spinner } from "@nextui-org/spinner";
 
+import InfoParagraph from "../_components/InfoParagraph";
+import PromptPage from "../_components/PromptPage";
 import ImageCarousel from "../_components/ImageCarousel";
-import useQuizService from "../_services/useQuizService";
 
-import promptData from "@/app/_data/test.json";
+import pageData from "@/app/_data/test.json";
 
 export default function Page() {
-  const images = ["./testimage.svg", "./testimage.svg"];
-
-  const [isLoading, setLoading] = React.useState(false);
-
-  const [selectedImageIndex, setSelectedImageIndex] = React.useState<
-    null | number
-  >(null);
-
   const userService = useUserService();
   const code = userService.code;
 
   const quizService = useQuizService();
-  const sendAnswer = quizService.sendAnswer;
-  const currentPrompt = quizService.currentPrompt;
+  const currentPage = quizService.currentPage;
+  const nextPage = quizService.nextPage;
 
-  const answerPrompt = async () => {
-    setLoading(true);
-    await sendAnswer(selectedImageIndex!);
-    setSelectedImageIndex(null);
-    setLoading(false);
+  const getComponentForPage = (page: any, showContinueButton: boolean) => {
+    switch (page.type) {
+      case "prompt":
+        return <PromptPage prompt={page} />;
+      case "info":
+        return (
+          <InfoParagraph title={page.header}>
+            <p>{page.text}</p>
+            {showContinueButton && (
+              <div className="flex justify-center items-center">
+                <Button
+                  className="mt-4"
+                  color="primary"
+                  onClick={() => nextPage()}
+                >
+                  Continue
+                </Button>
+              </div>
+            )}
+          </InfoParagraph>
+        );
+      default:
+        return <div>Type not known!</div>;
+    }
   };
 
   return (
     <main className=" h-screen flex flex-col items-center justify-center">
       <div className="m-2">
-        {isLoading ? (
-          <div className="flex flex-col justify-center items-center">
-            <Spinner />
-          </div>
-        ) : (
-          <div>
-            <div className="flex flex-col items-center justify-center">
-              <div className="text-sm">
-                <i>
-                  your personal code:{" "}
-                  <code className="text-green-600 text-medium">{code}</code>
-                </i>
-                <i>
-                  Current prompt index: <code>{currentPrompt}</code>
-                </i>
-              </div>
-              <ImageCarousel
-                prompt="Which room flows better?"
-                images={promptData.images}
-                selectedImageIndex={selectedImageIndex}
-                setSelectedImageIndex={setSelectedImageIndex}
-                answerPrompt={answerPrompt}
-              ></ImageCarousel>
-              <div className="hidden lg:block">
-                <Button
-                  color={selectedImageIndex === null ? "default" : "success"}
-                  disabled={selectedImageIndex === null}
-                  onClick={() => answerPrompt()}
-                >
-                  Confirm
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
+        <div className="text-sm">
+          {/* {pageData.pages.map((page) => {
+            return getComponentForPage(page);
+          })} */}
+          {getComponentForPage(pageData.pages[currentPage], currentPage !== pageData.pages.length - 1)}
+        </div>
       </div>
     </main>
   );
