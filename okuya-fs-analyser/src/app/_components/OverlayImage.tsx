@@ -31,14 +31,14 @@ export default function OverlayImage({
             onClick={() => setSelectedImageIndex(i)}
             className="block object-cover w-full h-auto z-0 scale-105 transition-all duration-300 ease-in-out"
           />
-          <div className="absolute inset-0 transition-all duration-300 ease-in-out group-hover:scale-100">
+          {/* <div className="absolute inset-0 transition-all duration-300 ease-in-out group-hover:scale-100">
             <div
               className="w-[72px] h-[72px] text-green-600 bg-white rounded-full flex justify-center items-center z-50"
               onClick={() => confirmAnswer()}
             >
               <AiFillCheckCircle size={64} />
             </div>
-          </div>
+          </div> */}
         </>
       ) : (
         <Image

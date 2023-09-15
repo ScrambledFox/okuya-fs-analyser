@@ -9,14 +9,14 @@ import useQuizService from "../_services/useQuizService";
 export default function ImageCarousel({
   images,
   imageConfirmed,
+  selectedImageIndex,
+  setSelectedImageIndex,
 }: {
   images: string[];
   imageConfirmed: (i: number) => void;
+  selectedImageIndex: number | null;
+  setSelectedImageIndex: React.Dispatch<React.SetStateAction<null | number>>;
 }) {
-  const [selectedImageIndex, setSelectedImageIndex] = React.useState<
-    number | null
-  >(null);
-
   const quizService = useQuizService();
   const sendAnswer = quizService.sendAnswer;
 
